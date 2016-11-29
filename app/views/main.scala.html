@@ -1,13 +1,14 @@
-@(title: String)(content: Html)
+@(item: Option[model.Item])
+
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>This Item</title>
     </head>
     <body>
 	   	<div >
-	        @content	        
+	        @item
 	    </div>
     </body>
 </html>
