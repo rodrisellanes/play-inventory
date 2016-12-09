@@ -1,0 +1,25 @@
+@(userForm: Form[model.User])(implicit messages: Messages)
+
+@import helper._
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New User</title>
+</head>
+<body>
+
+    <h3>New User</h3>
+
+    @helper.form(action = routes.Application.insertUser) {
+        @helper.inputText(field = userForm("fullName"), '_label -> "", 'placeholder -> "User Full Name")
+        @helper.inputText(field = userForm("branch"), '_label -> "", 'placeholder -> "Branch")
+
+    <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create User</button>
+        <a href="@routes.Application.selectAllUsers" class="btn">Cancel</a>
+    </div>
+    }
+</body>
+</html>

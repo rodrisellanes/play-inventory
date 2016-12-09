@@ -1,6 +1,6 @@
 package db
 
-import model.{Item, ItemDetails}
+import model.{Item, ItemMappingReverse}
 import slick.driver.MySQLDriver.api._
 
 import scala.concurrent.Await
@@ -60,5 +60,5 @@ object Items extends ItemDAO {
   }
 
   def detailsList = Await.result(selectAllFormattedQuery, Duration.Inf).map(toCaseClass _)
-  private[this] def toCaseClass(items: (Long, String, String, Double, String, String)) = ItemDetails.tupled(items)
+  private[this] def toCaseClass(items: (Long, String, String, Double, String, String)) = ItemMappingReverse.tupled(items)
 }

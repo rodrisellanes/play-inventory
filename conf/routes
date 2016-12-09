@@ -1,5 +1,10 @@
 
 
-GET     /                                     controllers.Application.selectAll
+
+GET     /users                                controllers.Application.selectAllUsers
+GET     /users/new                            controllers.Application.createUser
+POST    /users/new                            controllers.Application.insertUser
+
+GET     /items                                controllers.Application.selectAllItems
 GET     /:id                                  controllers.Application.show(id: Long)
 GET     /dbSchema                             controllers.Application.dbSchema

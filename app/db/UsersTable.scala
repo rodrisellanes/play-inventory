@@ -1,8 +1,10 @@
 package db
 
-import model.User
+import model.{User, UserMappingReverse}
 import slick.driver.MySQLDriver.api._
-import scala.concurrent.Future
+
+import scala.concurrent.{Await, Future}
+import scala.concurrent.duration.Duration
 
 
 class UsersTable(tag: Tag) extends Table[User](tag, "USERS") {
@@ -36,5 +38,19 @@ object Users extends UserDAO {
 
   def selectAll =
     dbConnection.run(Users.result)
+
+  // Methods use for JOIN query's
+  private lazy val formattedQuery =
+  for {
+    user  <- Users
+    branch  <- Branches.Branches if user.branch  === branch.id
+  } yield (user.id, user.fullName, branch.branchName)
+
+  def selectAllFormattedQuery = {
+    dbConnection.run(formattedQuery.result)
+  }
+
+  def detailsList = Await.result(selectAllFormattedQuery, Duration.Inf).map(toCaseClass _)
+  private[this] def toCaseClass(users: (Long, String, String)) = UserMappingReverse.tupled(users)
 
 }

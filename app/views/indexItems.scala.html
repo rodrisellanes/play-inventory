@@ -1,4 +1,4 @@
-@(items: Seq[model.ItemDetails])
+@(items: Seq[model.ItemMappingReverse])
 
 <html lang="en">
 <head>
@@ -6,6 +6,7 @@
     <title>Items Rep</title>
 </head>
 <body>
+
 <table>
     @for(item <- items) {
     <tr>
@@ -18,11 +19,6 @@
     </tr>
     }
 </table>
-
-
-<br>
-Item ID: <input type="text" name="fname">
-<input type="submit" value="Submit">
 
 </body>
 </html>
