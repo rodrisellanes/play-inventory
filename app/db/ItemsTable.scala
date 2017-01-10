@@ -50,15 +50,15 @@ object Items extends ItemDAO {
   // Methods use for JOIN query's
   private lazy val formattedQuery =
     for {
-      item  <- Items if item.active === true
+      item  <- Items
       cate  <- Categories.Categories if cate.id  === item.category
       user <- Users.Users if user.id === item.userAssigned
-    } yield (item.id, item.date, item.name, item.price, cate.category, user.fullName)
+    } yield (item.id, item.date, item.name, item.price, cate.category, user.fullName, item.active)
 
   def selectAllFormattedQuery = {
     dbConnection.run(formattedQuery.result)
   }
 
   def detailsList = Await.result(selectAllFormattedQuery, Duration.Inf).map(toCaseClass _)
-  private[this] def toCaseClass(items: (Long, String, String, Double, String, String)) = ItemMappingReverse.tupled(items)
+  private[this] def toCaseClass(items: (Long, String, String, Double, String, String, Boolean)) = ItemMappingReverse.tupled(items)
 }

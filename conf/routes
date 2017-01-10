@@ -1,10 +1,21 @@
 
+# Home Page
+GET     /                                     controllers.ApplicationGeneral.home
+
+# Users
+GET     /users                                controllers.ApplicationUser.selectAllUsers
+GET     /users/new                            controllers.ApplicationUser.createUser
+POST    /users/new                            controllers.ApplicationUser.insertUser
+
+#Items
+GET     /items                                controllers.ApplicationItem.selectAllItems
+GET     /items/new                            controllers.ApplicationItem.createItem
+POST    /items/new                            controllers.ApplicationItem.insertItem
+GET     /items/history                        controllers.ApplicationItem.deleteHistory
 
 
-GET     /users                                controllers.Application.selectAllUsers
-GET     /users/new                            controllers.Application.createUser
-POST    /users/new                            controllers.Application.insertUser
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                         controllers.Assets.at(path="/public", file)
 
-GET     /items                                controllers.Application.selectAllItems
-GET     /:id                                  controllers.Application.show(id: Long)
-GET     /dbSchema                             controllers.Application.dbSchema
+
+GET     /dbSchema                             controllers.ApplicationGeneral.dbSchema

@@ -1,0 +1,36 @@
+@(items: Seq[model.ItemMappingReverse])
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Items Rep</title>
+</head>
+
+
+<body>
+
+    <h2>List of Items</h2>
+
+    <a href="@routes.ApplicationGeneral.home">Home</a>
+    <a href="@routes.ApplicationItem.createItem">New Item</a>
+    <a href="@routes.ApplicationItem.deleteHistory">History</a>
+
+    <br><br>
+    <table>
+        @for(item <- items) {
+            @if(item.active) {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.date</td>
+                <td>@item.name</td>
+                <td>@item.price</td>
+                <td>@item.category</td>
+                <td>@item.userAssigned</td>
+            </tr>
+            }
+        }
+    </table>
+
+</body>
+</html>
+

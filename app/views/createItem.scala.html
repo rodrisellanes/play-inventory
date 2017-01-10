@@ -1,0 +1,30 @@
+@(itemForm: Form[model.Item])(implicit messages: Messages)
+
+@import helper._
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New Item</title>
+</head>
+<body>
+
+    <h3>New Item</h3>
+
+    @form(action = routes.ApplicationItem.insertItem) {
+        @inputDate(field = itemForm("date"), '_label -> "", 'placeholder -> "Date")
+        @inputText(field = itemForm("name"), '_label -> "", 'placeholder -> "Item")
+        @inputText(field = itemForm("price"), '_label -> "", 'placeholder -> "Price")
+        @inputText(field = itemForm("category"), '_label -> "", 'placeholder -> "Category")
+        @inputText(field = itemForm("userAssigned"), '_label -> "", 'placeholder -> "User Assigned")
+
+        <div class="form-actions"><br>
+            <button type="submit" class="btn btn-primary">Create Item</button>
+            <a href="@routes.ApplicationItem.selectAllItems" class="btn">Cancel</a>
+        </div>
+    }
+
+
+</body>
+</html>

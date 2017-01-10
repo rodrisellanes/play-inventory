@@ -1,14 +1,31 @@
-@(item: Option[model.Item])
+@(home: String)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>This Item</title>
+        <title>@home</title>
     </head>
     <body>
-	   	<div >
-	        @item
-	    </div>
+        <h1>@home</h1>
+        <ul>
+            <li>
+                <a href="@routes.ApplicationItem.selectAllItems">Items</a>
+            </li>
+            <li>
+                <a href="@routes.ApplicationUser.selectAllUsers">Users</a>
+            </li>
+            <li>
+                Category <span style="color: blue">coming soon...</span>
+            </li>
+            <li>
+                Branches <span style="color: blue">coming soon...</span>
+            </li>
+
+
+        </ul>
+
+        <hr>
+        <br> <i>Copyright 2016 - This software was developed by Rodrigo Sellanes</i>
     </body>
 </html>

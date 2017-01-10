@@ -1,19 +1,16 @@
 package controllers
 
 import com.google.inject.Inject
-import db.{Items, Users}
+import db.Users
 import model.User
-import play.api.data.Form
+import play.api.data._
 import play.api.data.Forms._
-import services.Services
 import play.api.mvc.{Action, Controller}
-import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.data.format.Formats._
 import play.api.Play.current
 import play.api.i18n.Messages.Implicits._
 
-
-class Application @Inject extends Controller {
-
+class ApplicationUser @Inject() extends Controller {
 
   val userForm = Form(
     mapping(
@@ -36,7 +33,7 @@ class Application @Inject extends Controller {
       userData => {
         // binding success, you get the actual value
         Users.insert(userData)
-        Redirect(routes.Application.selectAllUsers).flashing("success" -> "User saved!")
+        Redirect(routes.ApplicationUser.selectAllUsers).flashing("success" -> "User saved!")
       }
     )
 
@@ -44,28 +41,8 @@ class Application @Inject extends Controller {
 
   def selectAllUsers = Action {
     Ok(views.html.allUsers(Users.detailsList))
-
   }
 
-  // =============== ssss ===============
-
-  def dbSchema = Action {
-    val service = Services
-    service.init
-    Ok("Database Created!")
-  }
-
-
-  def selectAllItems = Action {
-    Ok(views.html.indexItems(Items.detailsList))
-
-  }
-
-  def show(id: Long) = Action.async {
-    Items.findById(id).map { item =>
-      Ok(views.html.main(item))
-    }
-  }
 
 
 }
